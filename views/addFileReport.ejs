@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="/stylesheets/style1.css">
+    <link rel="stylesheet" href="/stylesheets/style3.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+	<title>Lost And Found</title>
+</head>
+<body>
+    <section id="sidebar">
+		<a href="/dashboard/<%= userData.email %>" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">Lost and Found</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="/dashboard/<%= userData.email %>">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+            <li>
+				<a href="/editUser/<%= userData.id %>">
+					<i class='bx bxs-edit' ></i>
+					<span class="text">Edit Profile</span>
+				</a>
+			</li>
+            <li>
+				<a href="/changePassword/<%= userData.id %>">
+					<i class='bx bxs-data' ></i>
+					<span class="text">Change Password</span>
+				</a>
+			</li>
+			<% if(userData.email == "admin@nitc.ac.in" && userData.id == 2) { %>
+				<li>
+					<a href="/admin-users">
+						<i class='bx bxs-contact' ></i>
+						<span class="text">Check all users</span>
+					</a>
+				</li>
+				<li>
+					<a href="/admin-reports">
+						<i class='bx bxs-report' ></i>
+						<span class="text">Check all reports</span>
+					</a>
+				</li>
+				<% } %>
+			<li>
+				<a href="/" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+
+    <section id="content">
+
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link">Categories</a>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="/dashboard/<%= userData.email %>" class="profile">
+				<!-- <img src="./front1.jpg"> -->
+                <h4>Hi, <%= userData.firstName %></h4>
+			</a>
+		</nav>
+
+		<main>
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>File a report</h3>
+					</div>
+					<div class="">
+                        <div class="container">
+                           <div class="row text_center">
+                                <form id='register' class='input-group-register reportForm' method="post">
+                                    <% if(dataUpdated) { %>
+                                        <div class="success">Report Created Successfully</div>
+                                    <% } %>
+                                    <div>
+                                        <label for="id">User Id*: </label>
+                                        <input type='numeric'class='input-field'placeholder='Enter new password' required name="id" value="<%= userData.id %>" readonly>
+                                    </div>
+                                    <div>
+                                        <label for="item">Lost Item Type*:</label>
+                                        <select name="reportType" id="reportType" class='input-field'>
+                                            <option value="document">Document</option>
+                                            <option value="electronics">Electronics</option>
+                                            <option value="books">Books</option>
+                                            <option value="personalAccessories">Personal Accessories</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="item">Lost Item Name*:</label>
+                                        <input type='text'class='input-field'placeholder='Enter item name' required name="item">
+                                    </div>
+                                    <div>
+                                        <label for="item">Place*:</label>
+                                        <input type='text'class='input-field'placeholder='Enter place' required name="place">
+                                    </div>
+                                    <div>
+                                        <label for="item">Phone Number*:</label>
+                                        <input type='number'class='input-field'placeholder='Enter phone number' required name="phoneNumber">
+                                    </div>
+                                    <div>
+                                        <label for="item">Description*:</label>
+                                        <textarea type='text'class='input-field'placeholder='Put a description' required name="description"></textarea>
+                                    </div>
+                                    <button type='submit'class='submit-btn'>Submit</button>
+                                </form>                
+                           </div>
+                        </div>
+                      </div>
+				</div>
+			</div>
+		</main>
+	</section>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+	<script src="/javascripts/script.js"></script>
+</body>
+</html>
